@@ -1,0 +1,13 @@
+# dependencies
+/node_modules
+# next
+/.next
+/out
+# misc
+.DS_Store
+*.log
+.env*
+# working files (not for repo)
+_PREVIEW_V2.html
+_PHARMA_V2_NOTES.md
+/_to_delete
