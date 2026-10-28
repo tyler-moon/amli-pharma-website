@@ -2,10 +2,12 @@
 
 import React, { useEffect, useState, FormEvent } from "react";
 import Logo from "./Logo";
+import StoreDetails from "./StoreDetails";
+import { store } from "./store-data";
 
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/pharma.contact@amli.group";
 
-const pillars = ["Beauty", "Pharmacy", "Telemedicine"];
+const pillars = ["Beauty", "Pharmacy", "Telemedicine (in development)"];
 
 const platformIcons: Record<string, React.ReactElement> = {
   Beauty: (
@@ -37,43 +39,41 @@ const platform = [
     srcSet: "/images/triecare-beauty-experience-800.webp 800w, /images/triecare-beauty-experience.webp 1600w",
     width: 1600,
     height: 1067,
-    alt: "Visitors exploring beauty products at the TRIE CARE Tashkent opening."
+    alt: "Visitors exploring beauty products at the TRIECARE Tashkent opening."
   },
   {
     zone: "Pharmacy",
     title: "Care starts at the counter.",
-    text: "Beauty and pharmacy come together in our Tashkent store, with a team available to guide visitors.",
+    text: "Beauty and pharmacy come together in our Tashkent store. For pharmacy enquiries and product availability, speak directly with the store team.",
     img: "/images/triecare-store-service.webp",
     srcSet: "/images/triecare-store-service-800.webp 800w, /images/triecare-store-service.webp 1600w",
     width: 1600,
     height: 1067,
-    alt: "A TRIE CARE team member speaking with visitors at the store counter."
+    alt: "A TRIECARE team member speaking with visitors at the store counter."
   },
   {
     zone: "Telemedicine",
-    title: "Care that follows her home.",
-    text: "Our telemedicine platform is in development, designed to connect app-based consultations and follow-up with the in-store experience.",
-    img: "/images/platform-care.jpg",
-    alt: "Skincare continuing at home"
+    title: "Care beyond the store.",
+    text: "Our telemedicine service is in development. We are designing a physician-led pathway from an initial concern to a consultation and follow-up."
   }
 ];
 
 const trust = [
   {
     label: "Physicians decide",
-    text: "Clinical decisions rest with licensed doctors. The assistant informs and guides — it never diagnoses and never prescribes — with clear disclaimers and an audit trail."
+    text: "The service is being designed around licensed physicians. Any assistant will inform and guide, not diagnose or prescribe."
   },
   {
     label: "One membership, one record",
-    text: "Store, pharmacy, app and consultations share one membership and one history — so care doesn't restart at every counter."
+    text: "Our goal is to connect the store and digital care through one membership, with consent at each step."
   },
   {
     label: "Privacy by default",
-    text: "Beauty preferences, health information and consent live in one protected profile the customer controls."
+    text: "Customer control over personal information and consent is a design requirement, not an optional extra."
   },
   {
     label: "Made for the region",
-    text: "Halal-conscious ranges and service in local languages, from day one."
+    text: "We are designing the digital care experience for local languages and the needs of customers in Uzbekistan."
   }
 ];
 
@@ -92,7 +92,7 @@ export default function Page() {
       organisation: get("organisation"),
       email: get("email"),
       message: get("message"),
-      _subject: `AMLI Pharma enquiry — ${name || "Website"}`,
+      _subject: `AMLI Pharma enquiry: ${name || "Website"}`,
       _template: "table",
       _captcha: "false"
     };
@@ -123,7 +123,7 @@ export default function Page() {
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px 40px 0px" }
     );
     items.forEach((item) => observer.observe(item));
 
@@ -134,11 +134,13 @@ export default function Page() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // hero video cross-fade loop (family standard, framed variant)
+    // Keep both video layers behind the family overlay.
     let raf = 0;
+    let swapTimer = 0;
+    let heroB: HTMLVideoElement | null = null;
     const heroA = document.querySelector(".hero__video") as HTMLVideoElement | null;
-    if (heroA && heroA.tagName === "VIDEO") {
-      const heroB = heroA.cloneNode(true) as HTMLVideoElement;
+    if (heroA && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      heroB = heroA.cloneNode(true) as HTMLVideoElement;
       heroB.classList.add("hero__video--b");
       heroB.muted = true;
       heroB.loop = false;
@@ -159,7 +161,7 @@ export default function Page() {
           back.style.opacity = "1";
           front.style.opacity = "0";
           const tmp = front; front = back; back = tmp;
-          window.setTimeout(() => { swapping = false; }, FADE * 1000);
+          swapTimer = window.setTimeout(() => { swapping = false; }, FADE * 1000);
         }
         raf = requestAnimationFrame(loop);
       };
@@ -170,6 +172,9 @@ export default function Page() {
       observer.disconnect();
       window.removeEventListener("scroll", onScroll);
       if (raf) cancelAnimationFrame(raf);
+      window.clearTimeout(swapTimer);
+      heroB?.remove();
+      document.documentElement.classList.remove("reveal-ready");
     };
   }, []);
 
@@ -182,29 +187,29 @@ export default function Page() {
           </a>
           <div className="nav__links">
             <a href="#about">About</a>
-            <a href="#triecare">TRIE CARE</a>
+            <a href="#triecare">TRIECARE</a>
             <a href="#platform">Platform</a>
-            <a href="#app">The app</a>
+            <a href="#app">Digital care</a>
           </div>
-          <a className="nav__cta" href="#contact">
-            Get in touch
+          <a className="nav__cta" href="#visit">
+            Visit the store
           </a>
         </nav>
       </header>
 
       <main id="home">
-        {/* HERO — full-bleed video + wine overlay (family standard, B형) */}
+        {/* Full-bleed video with the family wine overlay. */}
         <section className="hero">
           <video
             className="hero__video"
-            autoPlay
             muted
             loop
             playsInline
-            poster="/images/pharma-hero-poster.jpg"
+            poster="/images/triecare-storefront.webp"
+            preload="metadata"
             aria-hidden="true"
           >
-            <source src="/videos/pharma-hero.mp4" type="video/mp4" />
+            <source src="/videos/triecare-opening-hero.mp4" type="video/mp4" />
           </video>
           <div className="hero__overlay" />
           <div className="hero__content">
@@ -215,12 +220,12 @@ export default function Page() {
                 <br /> beauty and care.
               </h1>
               <p className="hero__subtitle">
-                Beauty and care, brought together through TRIE CARE. Our first store
+                Beauty and care, brought together through TRIECARE. Our first store
                 opened in Tashkent, Uzbekistan, on 12 October 2026.
               </p>
               <div className="button-row">
-                <a className="button button--secondary button--on-dark" href="#platform">
-                  Our platform
+                <a className="button button--secondary button--on-dark" href="#visit">
+                  Find our Tashkent store
                 </a>
               </div>
               <ul className="hero__pillars" aria-label="What we bring together">
@@ -234,44 +239,44 @@ export default function Page() {
 
         {/* ABOUT */}
         <section className="section section--intro" id="about" data-reveal>
-          <div className="section__inner">
-            <div className="section-heading section-heading--wide">
+          <div className="section__inner section__inner--split about-layout">
+            <div className="section-heading section-heading--flush">
               <h2>Beauty and healthcare, under one roof.</h2>
               <p>
-                AMLI Pharma is the health &amp; beauty company of AMLI Group. Today we run a
-                distribution business in Malaysia, bringing beauty and personal-care products
-                to retailers across the country. We have brought that experience to
-                Central Asia through TRIE CARE, our retail and care brand, with our first
-                store now open in Tashkent, Uzbekistan.
+                AMLI Pharma is the health &amp; beauty company of AMLI Group.
+                Through TRIECARE, we bring beauty and everyday care together in
+                Tashkent, Uzbekistan. Our store opened on 12 October 2026.
               </p>
               <p>
-                AMLI Pharma is the company behind the brand — the name on the licences, the
-                contracts and the partnerships.
+                We are building a connected retail and care experience, starting
+                with our physical store. Telemedicine remains in development.
               </p>
             </div>
+            <figure className="about-photo">
+              <img src="/images/triecare-storefront.webp" srcSet="/images/triecare-storefront-800.webp 800w, /images/triecare-storefront.webp 1600w" sizes="(max-width: 900px) 100vw, 600px" width="1600" height="680" alt="TRIECARE storefront with its sign and opening-day balloons in Tashkent." loading="lazy" />
+            </figure>
           </div>
         </section>
 
-        {/* TRIE CARE — the brand */}
+        {/* TRIECARE brand and store information */}
         <section className="section section--brand" id="triecare" data-reveal>
           <div className="section__inner">
             <div className="section__inner--split">
               <div className="section-heading section-heading--flush">
-                <h2>Meet TRIE CARE.</h2>
+                <h2>Meet TRIECARE.</h2>
                 <p>
-                  One name for the store, the app and the bag. <strong>TRI is three</strong> —
-                  beauty, pharmacy, telemedicine. Uzbek comes first in the brand&apos;s voice —
-                  <em> Uchta parvarish, bitta sen</em> — with Russian and English alongside.
+                  <strong>TRI is three:</strong> beauty, pharmacy and telemedicine.
+                  A store you can visit today, with digital care being developed
+                  for tomorrow.
                 </p>
                 <p>
-                  The symbol is the Bloom — three petals, a drop of serum, a drop of dew, a drop
-                  of medicine, meeting at a single point. The point where they meet is the
-                  customer.
+                  Three petals meet at one point in our Bloom symbol.
+                  At the centre is you.
                 </p>
                 <ul className="petal-legend" aria-label="What the three petals mean">
-                  <li><span className="petal-dot petal-dot--plum" aria-hidden="true" />Pharmacy — trust and depth</li>
-                  <li><span className="petal-dot petal-dot--coral" aria-hidden="true" />Beauty — energy and freshness</li>
-                  <li><span className="petal-dot petal-dot--rose" aria-hidden="true" />Telemedicine — connection and warmth</li>
+                  <li><span className="petal-dot petal-dot--plum" aria-hidden="true" />Pharmacy</li>
+                  <li><span className="petal-dot petal-dot--coral" aria-hidden="true" />Beauty</li>
+                  <li><span className="petal-dot petal-dot--rose" aria-hidden="true" />Telemedicine, in development</li>
                 </ul>
               </div>
               <div className="brand-panel brand-panel--store" data-reveal>
@@ -282,37 +287,26 @@ export default function Page() {
                   sizes="(max-width: 1000px) 100vw, 650px"
                   width="1600"
                   height="1067"
-                  alt="The TRIE CARE Tashkent store, with its wall sign and beauty and personal-care shelves."
+                  alt="The TRIECARE Tashkent store, with beauty and personal-care shelves."
                   loading="lazy"
                 />
                 <p className="brand-panel__slogan">Uchta parvarish.<br />Bitta sen.</p>
                 <p className="brand-panel__slogan-alt">
-                  Three cares. One you. <span aria-hidden="true">&middot;</span> Три заботы — одна ты.
+                  Three cares. One you.
                 </p>
               </div>
             </div>
-            <article className="feature-row store-opening" id="opening" aria-labelledby="opening-heading" data-reveal>
-              <figure className="store-opening__media">
-                <img
-                  src="/images/triecare-grand-opening.webp"
-                  srcSet="/images/triecare-grand-opening-800.webp 800w, /images/triecare-grand-opening.webp 1600w"
-                  sizes="(max-width: 900px) 100vw, 600px"
-                  width="1600"
-                  height="1067"
-                  alt="Ribbon cutting at the TRIE CARE grand opening in Tashkent on 12 October 2026."
-                  loading="lazy"
-                />
-                <figcaption>Grand opening · Tashkent, Uzbekistan</figcaption>
-              </figure>
-              <div className="feature-row__body">
-                <p className="store-opening__date"><time dateTime="2026-10-12">12 October 2026</time></p>
-                <h3 id="opening-heading">Our doors are open in Tashkent.</h3>
-                <p>
-                  TRIE CARE marked its official launch with a ribbon-cutting ceremony,
-                  bringing our beauty and pharmacy brand to Uzbekistan.
-                </p>
+            <div className="store-visit" id="visit">
+              <div className="store-visit__heading" id="opening">
+                <h3>Visit us in Tashkent.</h3>
+                <p className="store-status">Open since <time dateTime="2026-10-12">12 October 2026</time></p>
+                <nav className="store-languages" aria-label="Store information languages">
+                  <a className="text-link" href="/store/uz/" hrefLang="uz" lang="uz">O&apos;zbekcha</a>
+                  <a className="text-link" href="/store/ru/" hrefLang="ru" lang="ru">Русский</a>
+                </nav>
               </div>
-            </article>
+              <StoreDetails />
+            </div>
           </div>
         </section>
 
@@ -323,14 +317,25 @@ export default function Page() {
               <h2>Inside our Tashkent store.</h2>
               <p className="store-status"><time dateTime="2026-10-12">Opened 12 October 2026</time> · Tashkent</p>
               <p>
-                Explore the store&apos;s beauty and pharmacy offering. The app and
-                telemedicine platform remain in development.
+                Beauty and everyday essentials in one place.
+                Our telemedicine service is in development.
               </p>
             </div>
             <div className="feature-rows">
               {platform.map((p, i) => (
                 <article className={`feature-row${i % 2 ? " feature-row--flip" : ""}${i === 0 ? " feature-row--lead" : ""}`} key={p.zone} data-reveal>
-                  <figure className="media-frame feature-row__media">
+                  {p.zone === "Telemedicine" ? (
+                    <figure className="care-concept feature-row__media" aria-label="Planned telemedicine pathway">
+                      <figcaption>Telemedicine <span>In development</span></figcaption>
+                      <ol>
+                        <li>Share a concern</li>
+                        <li>Speak with a physician</li>
+                        <li>Plan follow-up</li>
+                      </ol>
+                      <p>Clinical decisions stay with licensed physicians.</p>
+                    </figure>
+                  ) : (
+                    <figure className="media-frame feature-row__media">
                     <img
                       src={p.img}
                       srcSet={p.srcSet}
@@ -340,7 +345,8 @@ export default function Page() {
                       alt={p.alt}
                       loading="lazy"
                     />
-                  </figure>
+                    </figure>
+                  )}
                   <div className="feature-row__body">
                     {platformIcons[p.zone]}
                     <span className="zone-tag">{p.zone}</span>
@@ -353,7 +359,7 @@ export default function Page() {
           </div>
         </section>
 
-        {/* THE APP + SAFETY — dark band with app visual (R2 — Halodoc pattern) */}
+        {/* Digital-care design principles. */}
         <section className="section section--dark" id="app" data-reveal>
           <div className="section__inner">
             <div>
@@ -361,15 +367,13 @@ export default function Page() {
                 <div className="section-heading section-heading--wide section-heading--on-dark">
                   <h2>Care stays in physicians&apos; hands.</h2>
                   <p>
-                    With the Tashkent store now open, the TRIE CARE app remains in development.
-                    One assistant will help find the right product, give skincare advice, book a doctor when one is
-                    needed, and remember the refill afterwards. Four rules govern how it will
-                    work:
+                    Our telemedicine service is in development.
+                    These principles guide the care experience we are building.
                   </p>
                 </div>
                 <ol className="practice-list practice-list--dark" aria-label="Operating principles">
                   {trust.map((t, i) => (
-                    <li className="practice-row" key={t.label} data-reveal style={{ transitionDelay: `${i * 60}ms` }}>
+                    <li className="practice-row" key={t.label}>
                       <span className="practice-row__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
                       <div className="practice-row__body">
                         <h3>{t.label}</h3>
@@ -391,22 +395,23 @@ export default function Page() {
               <p>
                 For partnership, supply or general enquiries about AMLI Pharma, get in touch.
               </p>
+              <p>For store enquiries in Tashkent, call <a className="text-link" href={store.phoneHref}>{store.phone}</a> or <a className="text-link" href={store.telegram}>message us on Telegram</a>.</p>
             </div>
             <div className="callout callout--gold">
               <h2>Write to us.</h2>
               {status === "sent" ? (
                 <div className="contact-form__success" role="status">
-                  <p className="contact-form__success-title">Thank you — your message is on its way.</p>
+                  <p className="contact-form__success-title">Thank you. Your message is on its way.</p>
                   <p>Our team will be in touch shortly.</p>
                 </div>
               ) : (
                 <form className="contact-form" onSubmit={handleEnquiry}>
                   <div className="contact-form__row">
-                    <input className="contact-form__input" type="text" name="name" placeholder="Name" autoComplete="name" required />
-                    <input className="contact-form__input" type="text" name="organisation" placeholder="Organisation" autoComplete="organization" />
+                    <input className="contact-form__input" type="text" name="name" placeholder="Name" aria-label="Name" autoComplete="name" required />
+                    <input className="contact-form__input" type="text" name="organisation" placeholder="Organisation" aria-label="Organisation" autoComplete="organization" />
                   </div>
-                  <input className="contact-form__input" type="email" name="email" placeholder="Email" autoComplete="email" required />
-                  <textarea className="contact-form__input contact-form__textarea" name="message" placeholder="How can we help?" rows={4} required />
+                  <input className="contact-form__input" type="email" name="email" placeholder="Email" aria-label="Email" autoComplete="email" required />
+                  <textarea className="contact-form__input contact-form__textarea" name="message" placeholder="How can we help?" aria-label="How can we help?" rows={4} required />
                   <input type="text" name="_honey" tabIndex={-1} autoComplete="off" aria-hidden="true" className="contact-form__honey" />
                   <button className="button button--primary" type="submit" disabled={status === "sending"}>
                     {status === "sending" ? "Sending…" : "Send enquiry"}
@@ -417,7 +422,7 @@ export default function Page() {
                       <a className="text-link" href="mailto:pharma.contact@amli.group">pharma.contact@amli.group</a>.
                     </p>
                   ) : (
-                    <p className="contact-form__note">Sent straight to our team &mdash; we typically reply within one working day.</p>
+                    <p className="contact-form__note">Sent straight to our corporate team.</p>
                   )}
                 </form>
               )}
@@ -445,12 +450,17 @@ export default function Page() {
             <div>
               <h3>Company</h3>
               <a href="#about">About</a>
-              <a href="#triecare">TRIE CARE</a>
+              <a href="#triecare">TRIECARE</a>
               <a href="#platform">Platform</a>
-              <a href="#app">The app</a>
+              <a href="#app">Digital care</a>
             </div>
             <div>
-              <h3>Contact</h3>
+              <h3>Tashkent store</h3>
+              <a href="#visit">Bunyodkor 7G, Chilonzor</a>
+              <a href={store.phoneHref}>{store.phone}</a>
+              <a href={store.telegram}>Telegram @triecare_uz</a>
+              <a href={store.instagram}>Instagram @triecare.uz</a>
+              <h3 className="footer__corporate-label">Corporate enquiries</h3>
               <a href="mailto:pharma.contact@amli.group">pharma.contact@amli.group</a>
               <a href="tel:+60362636464">+60 3-6263 6464</a>
             </div>
@@ -458,7 +468,10 @@ export default function Page() {
         </div>
         <div className="footer__legal">
           <p>&copy; 2026 AMLI Pharma. An AMLI Group company.</p>
-          <p>Kuala Lumpur, Malaysia</p>
+          <div className="footer__entity">
+            <p>{store.entity} · STIR {store.stir} · Registration {store.registration}</p>
+            {store.licence && <p>Pharmacy licence No. {store.licence}</p>}
+          </div>
         </div>
       </footer>
     </>

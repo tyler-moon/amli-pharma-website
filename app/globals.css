@@ -1915,7 +1915,7 @@ section[id] {
 
 @media (max-width: 760px) {
   :root {
-    --header-height: 156px;
+    --header-height: 112px;
   }
 
   body {
@@ -2320,27 +2320,21 @@ section[id] {
    ============================================================ */
 /* genuine scroll reveal (hide until in view, with stagger) */
 .reveal-ready [data-reveal]:not(.is-visible) {
-  opacity: 0;
-  transform: translateY(28px);
+  opacity: 1;
+  transform: none;
 }
 .reveal-ready [data-reveal] {
-  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
-  will-change: opacity, transform;
+  transition: none;
 }
 
 /* hero entrance — staggered fade-up on load */
 @keyframes amliHeroIn {
-  from { opacity: 0; transform: translateY(22px); }
+  from { opacity: 1; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .hero__copy--animate > * {
-  animation: amliHeroIn 0.85s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation: amliHeroIn 0.28s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
-.hero__copy--animate > *:nth-child(1) { animation-delay: 0.05s; }
-.hero__copy--animate > *:nth-child(2) { animation-delay: 0.18s; }
-.hero__copy--animate > *:nth-child(3) { animation-delay: 0.31s; }
-.hero__copy--animate > *:nth-child(4) { animation-delay: 0.44s; }
-.hero__copy--animate > *:nth-child(5) { animation-delay: 0.57s; }
 
 /* slow cinematic zoom on the hero video */
 @keyframes amliHeroKen {
@@ -2695,14 +2689,14 @@ video.central-asia__background {
 .section--dark { background: radial-gradient(120% 90% at 50% 30%, #3a1019 0%, #2a0d16 60%, #230a11 100%); }
 
 /* key message: zoom-in + fade when the section enters view */
-@keyframes amliZoomIn { from { opacity:0; transform: scale(0.92); } to { opacity:1; transform: scale(1); } }
+@keyframes amliZoomIn { from { opacity:1; transform: scale(0.995); } to { opacity:1; transform: scale(1); } }
 @keyframes amliRise { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
 .section.is-visible .section-heading h2 {
-  animation: amliZoomIn 1s cubic-bezier(0.16,1,0.3,1) both;
+  animation: amliZoomIn 0.28s cubic-bezier(0.16,1,0.3,1) both;
   transform-origin: left center;
 }
-.section.is-visible .section-heading .eyebrow { animation: amliRise 0.7s ease both; }
-.section.is-visible .section-heading > p:not(.eyebrow) { animation: amliRise 0.9s ease both 0.12s; }
+.section.is-visible .section-heading .eyebrow,
+.section.is-visible .section-heading > p:not(.eyebrow) { animation: none; }
 @media (prefers-reduced-motion: reduce) {
   .section.is-visible .section-heading h2,
   .section.is-visible .section-heading .eyebrow,
@@ -2887,8 +2881,8 @@ video.central-asia__background {
 
 /* --- reveal: fade + slight zoom instead of pure rise --- */
 .reveal-ready [data-reveal]:not(.is-visible) {
-  opacity: 0;
-  transform: translateY(24px) scale(0.975);
+  opacity: 1;
+  transform: none;
 }
 .reveal-ready [data-reveal].is-visible {
   transform: translateY(0) scale(1);
@@ -3036,13 +3030,13 @@ video.central-asia__background {
 /* --- About: editorial intro --- */
 .section--intro {
   background: #ffffff;
-  padding-top: clamp(80px, 10vw, 140px);
-  padding-bottom: clamp(80px, 10vw, 140px);
+  padding-top: 80px;
+  padding-bottom: 40px;
 }
 .section--intro h2 {
-  font-size: clamp(38px, 4.4vw, 58px);
-  line-height: 1.04;
-  letter-spacing: -0.01em;
+  font-size: 42px;
+  line-height: 1.1;
+  letter-spacing: 0;
 }
 .section--intro .media-frame {
   aspect-ratio: 4 / 3;
@@ -3216,9 +3210,10 @@ video.central-asia__background {
   .leader-tile { justify-self: start; }
 }
 
-/* --- TRIE CARE brand section --- */
+/* --- TRIECARE brand section --- */
 .section--brand {
   background: #ffffff;
+  padding-top: 40px;
 }
 .petal-legend {
   list-style: none;
@@ -3414,11 +3409,88 @@ video.central-asia__background {
   .feature-row--lead { grid-template-columns: 1fr; }
 }
 
-/* --- opening status pill (pre-launch marker) --- */
+/* --- opening status pill (legacy) --- */
 .status-pill--opening {
   display: inline-block;
   margin: 0 0 18px;
   background: #f4e9dc;
   color: var(--gold);
   border: 1px solid rgba(154, 107, 18, 0.3);
+}
+
+/* Tashkent store information and planned digital-care pathway. */
+.about-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+}
+.section-heading--flush { margin-bottom: 0; }
+.about-photo { margin: 0; min-width: 0; }
+.about-photo img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 3px; }
+.store-visit { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--hairline); scroll-margin-top: calc(var(--header-height) + 24px); }
+.store-visit__heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 28px; margin-bottom: 28px; }
+.store-visit__heading h3 { font-size: 26px; margin: 0; color: var(--burgundy); }
+.store-visit__heading .store-status { margin: 0; }
+.store-languages { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
+.store-visit__heading .store-languages { margin-left: auto; }
+.store-details__facts { display: grid; grid-template-columns: 1.2fr 0.85fr 1fr; gap: 32px; margin: 0; }
+.store-details__facts > div { min-width: 0; }
+.store-details dt { font-size: 13px; font-weight: 700; color: var(--slate); margin-bottom: 8px; }
+.store-details dd { margin: 0 0 6px; font-size: 19px; }
+.store-details address { font-style: normal; max-width: 30ch; }
+.store-details a { overflow-wrap: anywhere; }
+.store-details__maps { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 24px; }
+.store-details__maps a, .store-languages a { font-family: Montserrat, Arial, sans-serif; font-size: 14px; font-weight: 600; }
+.care-concept { margin: 0; padding: 28px; border: 1px solid var(--hairline); border-radius: 4px; background: var(--mist); aspect-ratio: auto; }
+.care-concept figcaption { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font: 600 14px Montserrat, Arial, sans-serif; color: var(--burgundy); }
+.care-concept figcaption span { color: var(--slate); }
+.care-concept ol { padding: 0; margin: 26px 0; list-style-position: inside; font-family: Montserrat, Arial, sans-serif; }
+.care-concept li { padding: 16px 0; border-bottom: 1px solid var(--hairline); color: var(--navy); font-weight: 600; }
+.care-concept p { margin: 0; font-size: 15px; color: var(--slate); }
+.footer__columns .footer__corporate-label { margin-top: 24px; }
+.footer__entity { max-width: 64ch; }
+.footer__entity p { margin-bottom: 4px; }
+.footer a { overflow-wrap: anywhere; }
+.store-page__hero { position: relative; isolation: isolate; min-height: 440px; display: flex; align-items: end; color: var(--paper); }
+.store-page .nav { display: flex; justify-content: space-between; }
+.store-page__hero > img { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.store-page__hero::before { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(0deg, rgba(31, 42, 56, 0.9), rgba(31, 42, 56, 0) 85%); }
+.store-page__hero-copy { padding-top: 80px; padding-bottom: 36px; }
+.store-page__hero-copy h1 { font-size: 64px; line-height: 1; margin-bottom: 16px; }
+.store-page__hero-copy p { max-width: 36ch; font-size: 22px; margin: 0; color: rgba(255, 255, 255, 0.94); }
+.store-page__visit { padding: 64px 0; }
+.store-page__visit h2 { font-size: 36px; max-width: 24ch; }
+.store-page__development { margin: 32px 0 0; color: var(--slate); }
+.store-page__footer p { margin-bottom: 8px; }
+.store-languages--header { color: #fff; }
+.store-languages--header a { padding: 8px 0; text-underline-offset: 6px; }
+.store-languages--header a[aria-current="page"] { text-decoration: underline; }
+::selection { background: var(--burgundy); color: white; }
+:focus-visible { outline: 2px solid var(--burgundy); outline-offset: 4px; }
+.site-header :focus-visible, .footer :focus-visible { outline-color: white; }
+
+@media (max-width: 900px) {
+  .about-layout { grid-template-columns: 1fr; gap: 24px; }
+  .about-photo img { aspect-ratio: 16 / 9; }
+  .section--intro { padding: 56px 0 28px; }
+  .section--brand { padding-top: 28px; }
+  .store-details__facts { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .store-visit__heading .store-languages { margin-left: 0; }
+}
+@media (max-width: 560px) {
+  .section--intro h2 { font-size: 32px; }
+  .store-details__facts { grid-template-columns: 1fr; gap: 20px; }
+  .store-details dd { font-size: 18px; }
+  .store-visit { margin-top: 32px; }
+  .store-visit__heading { display: grid; gap: 10px; }
+  .care-concept { padding: 22px; }
+  .store-page .nav { flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 16px; padding: 16px 18px; }
+  .store-languages--header { gap: 12px; }
+  .store-languages--header a { font-size: 12px; }
+  .store-page__hero { min-height: 380px; }
+  .store-page__hero-copy h1 { font-size: 38px; }
+  .store-page__hero-copy p { font-size: 19px; }
+  .store-page__visit { padding: 40px 0; }
+  .store-page__visit h2 { font-size: 28px; }
+  .footer__legal { align-items: start; }
 }

@@ -6,18 +6,18 @@ export const metadata: Metadata = {
   applicationName: "AMLI Pharma",
   title: "AMLI Pharma | Beauty, pharmacy & care in one place",
   description:
-    "AMLI Pharma brings beauty and care together through TRIE CARE. Our first store opened in Tashkent, Uzbekistan, on 12 October 2026.",
+    "AMLI Pharma brings beauty and care together through TRIECARE. Visit our Tashkent store at Bunyodkor 7G, open daily 08:00-23:00.",
   robots: { index: true, follow: true },
   openGraph: {
     title: "AMLI Pharma | Beauty, pharmacy & care in one place",
     description:
-      "TRIE CARE opened in Tashkent on 12 October 2026, bringing beauty and pharmacy together. The app and telemedicine platform are in development.",
+      "TRIECARE opened in Tashkent on 12 October 2026, bringing beauty and pharmacy together. Telemedicine is in development.",
     images: [
       {
         url: "/images/triecare-tashkent-store.webp",
         width: 1600,
         height: 1067,
-        alt: "The TRIE CARE store in Tashkent, Uzbekistan"
+        alt: "The TRIECARE store in Tashkent, Uzbekistan"
       }
     ],
     type: "website"
@@ -39,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-MY">
+    <html lang="en">
       <body>{children}</body>
     </html>
   );
