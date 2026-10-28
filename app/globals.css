@@ -3439,8 +3439,7 @@ video.central-asia__background {
 .store-details dd { margin: 0 0 6px; font-size: 19px; }
 .store-details address { font-style: normal; max-width: 30ch; }
 .store-details a { overflow-wrap: anywhere; }
-.store-details__maps { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 24px; }
-.store-details__maps a, .store-languages a { font-family: Montserrat, Arial, sans-serif; font-size: 14px; font-weight: 600; }
+.store-languages a { font-family: Montserrat, Arial, sans-serif; font-size: 14px; font-weight: 600; }
 .care-concept { margin: 0; padding: 28px; border: 1px solid var(--hairline); border-radius: 4px; background: var(--mist); aspect-ratio: auto; }
 .care-concept figcaption { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font: 600 14px Montserrat, Arial, sans-serif; color: var(--burgundy); }
 .care-concept figcaption span { color: var(--slate); }

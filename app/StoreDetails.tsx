@@ -20,11 +20,6 @@ export default function StoreDetails({ locale = "en" }: { locale?: keyof typeof 
           {store.instagram && <dd><a className="text-link" href={store.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></dd>}
         </div>
       </dl>
-      <nav className="store-details__maps" aria-label={copy.mapsLabel}>
-        {store.maps.map((map) => (
-          <a className="text-link" key={map.name} href={map.href} target="_blank" rel="noopener noreferrer">{map.name}</a>
-        ))}
-      </nav>
     </div>
   );
 }
