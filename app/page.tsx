@@ -31,22 +31,28 @@ const platformIcons: Record<string, React.ReactElement> = {
 const platform = [
   {
     zone: "Beauty",
-    title: "Curated K-beauty, weeks from Seoul.",
-    text: "Halal-conscious K-beauty, curated in Korea and landing on the shelves within weeks of release — in a store made for browsing, testing and discovering.",
-    img: "/images/platform-beauty.jpg",
-    alt: "Colourful K-beauty shelves in store"
+    title: "Beauty to discover, in person.",
+    text: "Browse beauty and personal-care ranges, explore the shelves and try products in our Tashkent store.",
+    img: "/images/triecare-beauty-experience.webp",
+    srcSet: "/images/triecare-beauty-experience-800.webp 800w, /images/triecare-beauty-experience.webp 1600w",
+    width: 1600,
+    height: 1067,
+    alt: "Visitors exploring beauty products at the TRIE CARE Tashkent opening."
   },
   {
     zone: "Pharmacy",
-    title: "A pharmacy at the same counter.",
-    text: "Over-the-counter and prescription medicines at the same counter, on the same membership — with a pharmacist to talk to.",
-    img: "/images/platform-pharmacy.jpg",
-    alt: "Pharmacist preparing a prescription at the counter"
+    title: "Care starts at the counter.",
+    text: "Beauty and pharmacy come together in our Tashkent store, with a team available to guide visitors.",
+    img: "/images/triecare-store-service.webp",
+    srcSet: "/images/triecare-store-service-800.webp 800w, /images/triecare-store-service.webp 1600w",
+    width: 1600,
+    height: 1067,
+    alt: "A TRIE CARE team member speaking with visitors at the store counter."
   },
   {
     zone: "Telemedicine",
     title: "Care that follows her home.",
-    text: "Video consultations, prescriptions and follow-up by licensed physicians — booked from the app, picked up in store, continued at home.",
+    text: "Our telemedicine platform is in development, designed to connect app-based consultations and follow-up with the in-store experience.",
     img: "/images/platform-care.jpg",
     alt: "Skincare continuing at home"
   }
@@ -209,8 +215,8 @@ export default function Page() {
                 <br /> beauty and care.
               </h1>
               <p className="hero__subtitle">
-                Beauty, a pharmacy and a doctor in one place — one store, one app.
-                Opening first in Tashkent, Uzbekistan.
+                Beauty and care, brought together through TRIE CARE. Our first store
+                opened in Tashkent, Uzbekistan, on 12 October 2026.
               </p>
               <div className="button-row">
                 <a className="button button--secondary button--on-dark" href="#platform">
@@ -234,9 +240,9 @@ export default function Page() {
               <p>
                 AMLI Pharma is the health &amp; beauty company of AMLI Group. Today we run a
                 distribution business in Malaysia, bringing beauty and personal-care products
-                to retailers across the country. Now we are taking that experience into
-                Central Asia — starting with Uzbekistan, where we are opening a new retail
-                and care brand in Tashkent.
+                to retailers across the country. We have brought that experience to
+                Central Asia through TRIE CARE, our retail and care brand, with our first
+                store now open in Tashkent, Uzbekistan.
               </p>
               <p>
                 AMLI Pharma is the company behind the brand — the name on the licences, the
@@ -248,32 +254,65 @@ export default function Page() {
 
         {/* TRIE CARE — the brand */}
         <section className="section section--brand" id="triecare" data-reveal>
-          <div className="section__inner section__inner--split">
-            <div className="section-heading section-heading--flush">
-              <h2>Meet TRIE CARE.</h2>
-              <p>
-                One name for the store, the app and the bag. <strong>TRI is three</strong> —
-                beauty, pharmacy, telemedicine. The brand will speak Uzbek first —
-                <em> Uchta parvarish, bitta sen</em> — with Russian and English alongside.
-              </p>
-              <p>
-                The symbol is the Bloom — three petals, a drop of serum, a drop of dew, a drop
-                of medicine, meeting at a single point. The point where they meet is the
-                customer.
-              </p>
-              <ul className="petal-legend" aria-label="What the three petals mean">
-                <li><span className="petal-dot petal-dot--plum" aria-hidden="true" />Pharmacy — trust and depth</li>
-                <li><span className="petal-dot petal-dot--coral" aria-hidden="true" />Beauty — energy and freshness</li>
-                <li><span className="petal-dot petal-dot--rose" aria-hidden="true" />Telemedicine — connection and warmth</li>
-              </ul>
+          <div className="section__inner">
+            <div className="section__inner--split">
+              <div className="section-heading section-heading--flush">
+                <h2>Meet TRIE CARE.</h2>
+                <p>
+                  One name for the store, the app and the bag. <strong>TRI is three</strong> —
+                  beauty, pharmacy, telemedicine. Uzbek comes first in the brand&apos;s voice —
+                  <em> Uchta parvarish, bitta sen</em> — with Russian and English alongside.
+                </p>
+                <p>
+                  The symbol is the Bloom — three petals, a drop of serum, a drop of dew, a drop
+                  of medicine, meeting at a single point. The point where they meet is the
+                  customer.
+                </p>
+                <ul className="petal-legend" aria-label="What the three petals mean">
+                  <li><span className="petal-dot petal-dot--plum" aria-hidden="true" />Pharmacy — trust and depth</li>
+                  <li><span className="petal-dot petal-dot--coral" aria-hidden="true" />Beauty — energy and freshness</li>
+                  <li><span className="petal-dot petal-dot--rose" aria-hidden="true" />Telemedicine — connection and warmth</li>
+                </ul>
+              </div>
+              <div className="brand-panel brand-panel--store" data-reveal>
+                <img
+                  className="brand-panel__photo"
+                  src="/images/triecare-tashkent-store.webp"
+                  srcSet="/images/triecare-tashkent-store-800.webp 800w, /images/triecare-tashkent-store.webp 1600w"
+                  sizes="(max-width: 1000px) 100vw, 650px"
+                  width="1600"
+                  height="1067"
+                  alt="The TRIE CARE Tashkent store, with its wall sign and beauty and personal-care shelves."
+                  loading="lazy"
+                />
+                <p className="brand-panel__slogan">Uchta parvarish.<br />Bitta sen.</p>
+                <p className="brand-panel__slogan-alt">
+                  Three cares. One you. <span aria-hidden="true">&middot;</span> Три заботы — одна ты.
+                </p>
+              </div>
             </div>
-            <div className="brand-panel" data-reveal>
-              <img className="brand-panel__photo" src="/images/pharma-about.jpg" alt="TRIE CARE logo on the store concept brand wall" loading="lazy" />
-              <p className="brand-panel__slogan">Uchta parvarish.<br />Bitta sen.</p>
-              <p className="brand-panel__slogan-alt">
-                Three cares. One you. <span aria-hidden="true">&middot;</span> Три заботы — одна ты.
-              </p>
-            </div>
+            <article className="feature-row store-opening" id="opening" aria-labelledby="opening-heading" data-reveal>
+              <figure className="store-opening__media">
+                <img
+                  src="/images/triecare-grand-opening.webp"
+                  srcSet="/images/triecare-grand-opening-800.webp 800w, /images/triecare-grand-opening.webp 1600w"
+                  sizes="(max-width: 900px) 100vw, 600px"
+                  width="1600"
+                  height="1067"
+                  alt="Ribbon cutting at the TRIE CARE grand opening in Tashkent on 12 October 2026."
+                  loading="lazy"
+                />
+                <figcaption>Grand opening · Tashkent, Uzbekistan</figcaption>
+              </figure>
+              <div className="feature-row__body">
+                <p className="store-opening__date"><time dateTime="2026-10-12">12 October 2026</time></p>
+                <h3 id="opening-heading">Our doors are open in Tashkent.</h3>
+                <p>
+                  TRIE CARE marked its official launch with a ribbon-cutting ceremony,
+                  bringing our beauty and pharmacy brand to Uzbekistan.
+                </p>
+              </div>
+            </article>
           </div>
         </section>
 
@@ -281,18 +320,26 @@ export default function Page() {
         <section className="section" id="platform" data-reveal>
           <div className="section__inner">
             <div className="section-heading section-heading--wide">
-              <h2>Inside the first TRIE CARE store.</h2>
-              <p className="status-pill status-pill--opening">First store — opening 2026, Tashkent</p>
+              <h2>Inside our Tashkent store.</h2>
+              <p className="store-status"><time dateTime="2026-10-12">Opened 12 October 2026</time> · Tashkent</p>
               <p>
-                Walk in for the beauty wall, stay for the pharmacy counter, leave with the app in
-                your pocket. Three things that usually live apart, designed side by side.
+                Explore the store&apos;s beauty and pharmacy offering. The app and
+                telemedicine platform remain in development.
               </p>
             </div>
             <div className="feature-rows">
               {platform.map((p, i) => (
                 <article className={`feature-row${i % 2 ? " feature-row--flip" : ""}${i === 0 ? " feature-row--lead" : ""}`} key={p.zone} data-reveal>
                   <figure className="media-frame feature-row__media">
-                    <img src={p.img} alt={p.alt} loading="lazy" />
+                    <img
+                      src={p.img}
+                      srcSet={p.srcSet}
+                      sizes={i === 0 ? "(max-width: 900px) 100vw, 800px" : "(max-width: 900px) 100vw, 650px"}
+                      width={p.width}
+                      height={p.height}
+                      alt={p.alt}
+                      loading="lazy"
+                    />
                   </figure>
                   <div className="feature-row__body">
                     {platformIcons[p.zone]}
@@ -314,8 +361,8 @@ export default function Page() {
                 <div className="section-heading section-heading--wide section-heading--on-dark">
                   <h2>Care stays in physicians&apos; hands.</h2>
                   <p>
-                    The TRIE CARE app is being built alongside the store. One assistant will help
-                    find the right product, give skincare advice, book a doctor when one is
+                    With the Tashkent store now open, the TRIE CARE app remains in development.
+                    One assistant will help find the right product, give skincare advice, book a doctor when one is
                     needed, and remember the refill afterwards. Four rules govern how it will
                     work:
                   </p>

@@ -3278,6 +3278,55 @@ video.central-asia__background {
   margin: 0;
 }
 
+.brand-panel--store {
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  text-align: left;
+}
+.brand-panel--store .brand-panel__photo {
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+.store-opening {
+  margin-top: 64px;
+  padding-top: 48px;
+  border-top: 1px solid var(--hairline);
+}
+.store-opening__media {
+  min-width: 0;
+  margin: 0;
+}
+.store-opening__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+}
+.store-opening__media figcaption {
+  margin-top: 12px;
+  color: var(--slate);
+  font-size: 14px;
+}
+.store-opening .store-opening__date,
+.store-status {
+  margin: 0 0 16px;
+  color: var(--burgundy);
+  font-family: Montserrat, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+@media (max-width: 900px) {
+  .store-opening {
+    margin-top: 48px;
+    padding-top: 32px;
+  }
+}
+
 .brand-duo {
   display: grid;
   grid-template-columns: 1.4fr 1fr;

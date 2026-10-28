@@ -6,18 +6,18 @@ export const metadata: Metadata = {
   applicationName: "AMLI Pharma",
   title: "AMLI Pharma | Beauty, pharmacy & care in one place",
   description:
-    "AMLI Pharma is the health & beauty company of AMLI Group. We distribute in Malaysia and are opening TRIE CARE — beauty, pharmacy and telemedicine in one store and one app — in Tashkent, Uzbekistan.",
+    "AMLI Pharma brings beauty and care together through TRIE CARE. Our first store opened in Tashkent, Uzbekistan, on 12 October 2026.",
   robots: { index: true, follow: true },
   openGraph: {
     title: "AMLI Pharma | Beauty, pharmacy & care in one place",
     description:
-      "Beauty, a pharmacy and a doctor in one place — one store, one app. Opening first in Tashkent, Uzbekistan.",
+      "TRIE CARE opened in Tashkent on 12 October 2026, bringing beauty and pharmacy together. The app and telemedicine platform are in development.",
     images: [
       {
-        url: "/images/pharma-hero-poster.jpg",
+        url: "/images/triecare-tashkent-store.webp",
         width: 1600,
-        height: 900,
-        alt: "AMLI Pharma"
+        height: 1067,
+        alt: "The TRIE CARE store in Tashkent, Uzbekistan"
       }
     ],
     type: "website"
