@@ -3419,6 +3419,15 @@ video.central-asia__background {
 }
 
 /* Tashkent store information and planned digital-care pathway. */
+.opening-gallery { padding: 64px 0; background: var(--mist); scroll-margin-top: calc(var(--header-height) + 24px); }
+.opening-gallery__heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 16px 40px; margin-bottom: 32px; }
+.opening-gallery__heading h2 { margin: 0; font-size: 38px; color: var(--burgundy); }
+.opening-gallery__heading p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--slate); }
+.opening-gallery__photos { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 28px 24px; }
+.opening-gallery__photo { grid-column: span 3; margin: 0; min-width: 0; }
+.opening-gallery__photo--lead { grid-column: span 6; }
+.opening-gallery__photo img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 3px; }
+.opening-gallery__photo figcaption { margin-top: 10px; font-size: 15px; line-height: 1.5; color: var(--navy); }
 .about-layout {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 48px;
@@ -3469,6 +3478,8 @@ video.central-asia__background {
 .site-header :focus-visible, .footer :focus-visible { outline-color: white; }
 
 @media (max-width: 900px) {
+  .opening-gallery__photos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .opening-gallery__photo, .opening-gallery__photo--lead { grid-column: auto; }
   .about-layout { grid-template-columns: 1fr; gap: 24px; }
   .about-photo img { aspect-ratio: 16 / 9; }
   .section--intro { padding: 56px 0 28px; }
@@ -3477,6 +3488,10 @@ video.central-asia__background {
   .store-visit__heading .store-languages { margin-left: 0; }
 }
 @media (max-width: 560px) {
+  .opening-gallery { padding: 48px 0; }
+  .opening-gallery__heading { gap: 14px; margin-bottom: 24px; }
+  .opening-gallery__heading h2 { font-size: 28px; }
+  .opening-gallery__photos { grid-template-columns: 1fr; gap: 24px; }
   .section--intro h2 { font-size: 32px; }
   .store-details__facts { grid-template-columns: 1fr; gap: 20px; }
   .store-details dd { font-size: 18px; }

@@ -9,6 +9,39 @@ const FORM_ENDPOINT = "https://formsubmit.co/ajax/pharma.contact@amli.group";
 
 const pillars = ["Beauty", "Pharmacy", "Telemedicine (in development)"];
 
+const openingPhotos = [
+  {
+    image: "ribbon-cutting",
+    alt: "Three guests cutting the red ribbon at the TRIECARE entrance, with musicians and attendees behind them.",
+    caption: "Cutting the ribbon."
+  },
+  {
+    image: "ribbon-celebration",
+    alt: "The ribbon-cutting guests holding the cut ribbon as attendees applaud outside TRIECARE.",
+    caption: "Celebrating the opening."
+  },
+  {
+    image: "stage-guests",
+    alt: "Guests together on stage in front of the TRIECARE Grand Opening Ceremony backdrop.",
+    caption: "Together on stage."
+  },
+  {
+    image: "live-music",
+    alt: "Musicians performing in traditional dress on the outdoor opening-ceremony stage.",
+    caption: "Live music at the ceremony."
+  },
+  {
+    image: "event-audience",
+    alt: "Attendees seated outside for the TRIECARE opening ceremony in Tashkent.",
+    caption: "Guests at the opening."
+  },
+  {
+    image: "store-visit",
+    alt: "Opening-day visitors exploring the shelves inside the TRIECARE store.",
+    caption: "A first look inside."
+  }
+];
+
 const platformIcons: Record<string, React.ReactElement> = {
   Beauty: (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -278,6 +311,7 @@ export default function Page() {
                   <li><span className="petal-dot petal-dot--coral" aria-hidden="true" />Beauty</li>
                   <li><span className="petal-dot petal-dot--rose" aria-hidden="true" />Telemedicine, in development</li>
                 </ul>
+                <a className="text-link" href="#opening">See the opening ceremony</a>
               </div>
               <div className="brand-panel brand-panel--store" data-reveal>
                 <img
@@ -297,7 +331,7 @@ export default function Page() {
               </div>
             </div>
             <div className="store-visit" id="visit">
-              <div className="store-visit__heading" id="opening">
+              <div className="store-visit__heading">
                 <h3>Visit us in Tashkent.</h3>
                 <p className="store-status">Open since <time dateTime="2026-10-12">12 October 2026</time></p>
                 <nav className="store-languages" aria-label="Store information languages">
@@ -306,6 +340,34 @@ export default function Page() {
                 </nav>
               </div>
               <StoreDetails />
+            </div>
+          </div>
+        </section>
+
+        <section className="section opening-gallery" id="opening" aria-labelledby="opening-title">
+          <div className="section__inner">
+            <div className="opening-gallery__heading">
+              <h2 id="opening-title">TRIECARE opening day.</h2>
+              <p><time dateTime="2026-10-12">12 October 2026</time><br />Tashkent, Uzbekistan</p>
+            </div>
+            <div className="opening-gallery__photos">
+              {openingPhotos.map((photo, i) => (
+                <figure className={`opening-gallery__photo${i < 2 ? " opening-gallery__photo--lead" : ""}`} key={photo.image}>
+                  <img
+                    src={`/images/opening/${photo.image}.webp`}
+                    srcSet={`/images/opening/${photo.image}-800.webp 800w, /images/opening/${photo.image}.webp 1600w`}
+                    sizes={i < 2
+                      ? "(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc((100vw - 64px) / 2), 578px"
+                      : "(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc((100vw - 64px) / 2), 277px"}
+                    width="1600"
+                    height="1067"
+                    alt={photo.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <figcaption>{photo.caption}</figcaption>
+                </figure>
+              ))}
             </div>
           </div>
         </section>
