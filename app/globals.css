@@ -3419,15 +3419,30 @@ video.central-asia__background {
 }
 
 /* Tashkent store information and planned digital-care pathway. */
-.opening-gallery { padding: 64px 0; background: var(--mist); scroll-margin-top: calc(var(--header-height) + 24px); }
-.opening-gallery__heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 16px 40px; margin-bottom: 32px; }
+.opening-gallery { padding: 48px 0; background: var(--paper); scroll-margin-top: calc(var(--header-height) + 24px); }
+.opening-gallery__heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 16px 40px; margin-bottom: 24px; }
 .opening-gallery__heading h2 { margin: 0; font-size: 38px; color: var(--burgundy); }
 .opening-gallery__heading p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--slate); }
-.opening-gallery__photos { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 28px 24px; }
-.opening-gallery__photo { grid-column: span 3; margin: 0; min-width: 0; }
-.opening-gallery__photo--lead { grid-column: span 6; }
-.opening-gallery__photo img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 3px; }
-.opening-gallery__photo figcaption { margin-top: 10px; font-size: 15px; line-height: 1.5; color: var(--navy); }
+.opening-gallery__frame { position: relative; isolation: isolate; aspect-ratio: 16 / 9; min-height: 320px; max-height: 62svh; overflow: hidden; border-radius: 3px; background: var(--mist); touch-action: pan-y; }
+.opening-gallery__image { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 58%; opacity: 0; }
+.opening-gallery__image.is-previous { opacity: 1; }
+.opening-gallery__image.is-active { z-index: 1; opacity: 1; animation: opening-photo-in 1100ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.opening-gallery__image.is-active.is-previous { animation: none; }
+@keyframes opening-photo-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.opening-gallery__footer { display: flex; justify-content: space-between; align-items: center; min-height: 60px; gap: 24px; }
+.opening-gallery__count { font: 500 13px Montserrat, Arial, sans-serif; font-variant-numeric: tabular-nums; color: var(--slate); }
+.opening-gallery__controls { display: flex; align-items: center; gap: 8px; }
+.opening-gallery__controls button { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 0; color: var(--burgundy); background: transparent; cursor: pointer; transition: background-color 160ms ease; }
+.opening-gallery__controls button:hover { background: var(--mist); }
+.opening-gallery__controls button:disabled { opacity: 0.4; cursor: default; }
+.opening-gallery__status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .opening-gallery__image.is-active { animation: none; }
+  .opening-gallery__controls button { transition: none; }
+}
 .about-layout {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 48px;
@@ -3478,8 +3493,6 @@ video.central-asia__background {
 .site-header :focus-visible, .footer :focus-visible { outline-color: white; }
 
 @media (max-width: 900px) {
-  .opening-gallery__photos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .opening-gallery__photo, .opening-gallery__photo--lead { grid-column: auto; }
   .about-layout { grid-template-columns: 1fr; gap: 24px; }
   .about-photo img { aspect-ratio: 16 / 9; }
   .section--intro { padding: 56px 0 28px; }
@@ -3491,7 +3504,7 @@ video.central-asia__background {
   .opening-gallery { padding: 48px 0; }
   .opening-gallery__heading { gap: 14px; margin-bottom: 24px; }
   .opening-gallery__heading h2 { font-size: 28px; }
-  .opening-gallery__photos { grid-template-columns: 1fr; gap: 24px; }
+  .opening-gallery__frame { aspect-ratio: 3 / 2; min-height: 0; max-height: none; }
   .section--intro h2 { font-size: 32px; }
   .store-details__facts { grid-template-columns: 1fr; gap: 20px; }
   .store-details dd { font-size: 18px; }
